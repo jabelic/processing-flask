@@ -3,15 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="6; url=share" />
-    <script src="static/processing.js"></script>
+    <meta http-equiv="refresh" content="60*100; url=share" />
+    <script src="static/processing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+    <script src="static/style.js"></script>
+    <script>
+      const timeLimit = 60*100;
+      const timerExec = false;
+      function setup(){
+      //キャンバスを作成
+      var myCanvas = createCanvas(500, 300);
+      myCanvas.parent("canvasContainer");
+      //図形の線無し
+      noStroke();
+      textAlign(CENTER,CENTER);
+      textSize(50);
+    }
+    function draw(){
+      const timerX = width/2;
+      const timerY = height/2;
+      const ms = Math.floor(millis()/1000);
+      background(250);
+      //オブジェクトの色をランダム（透明度70）
+      fill(random(255),random(255),random(255),70);
+      //キャンバスの中心に直径100pxの丸を描画
+      ellipse(random(width),random(height),random(100));
+
+      var countDown = timeLimit - ms;
+      fill(0);
+    if(60*60 - 1< countDown && countDown < 60*60*10 && ((countDown - 60*60*(countDown/(60*60)))/(60)) < 10 && countDown%60 < 10){
+      //1時間以上10時間以下 かつ 0分以上10分未満 かつ 0秒 < n < 10秒
+      text("0" + Math.floor(countDown/(60*60)) + ":0" + Math.floor(((countDown - 60*60*(countDown/(60*60)))/(60))) + ":0" + Math.floor(countDown%60), timerX, timerY);
+    }else if(60*60 - 1< countDown && ((countDown - 60*60*(countDown/(60*60)))/(60)) < 10 && countDown < 60*60*10){
+      //1時間以上10時間以下 かつ 0分以上10分未満 かつ 9秒 < n < 60秒
+      text("0" + Math.floor(countDown/(60*60)) + ":0" + Math.floor(((countDown - 60*60*(countDown/(60*60)))/(60))) + ":" + Math.floor(countDown%60), timerX, timerY);
+    }else if(60*60 - 1< countDown && countDown < 60*60*10 && countDown%60 < 10){
+      //1時間以上10時間以下 かつ 10分以上60分未満 かつ 0秒 < n < 10秒
+      text("0" + Math.floor(countDown/(60*60)) + ":" + Math.floor(((countDown - 60*60*(countDown/(60*60)))/(60))) + ":0" + Math.floor(countDown%60), timerX, timerY);
+    }else if(60*60 - 1< countDown && countDown < 60*60*10){
+      //1時間以上10時間以下 かつ 10分以上60分未満 かつ 9秒 < n < 60秒
+      text("0" + Math.floor(countDown/(60*60)) + ":" + Math.floor(((countDown - 60*60*(countDown/(60*60)))/(60))) + ":" + Math.floor(countDown%60), timerX, timerY);
+    }else if(60*10 - 1 < countDown && countDown < 60*60 && countDown%60 < 10){
+      //10分以上60分未満 かつ 0秒 < n < 10秒
+      text(Math.floor(countDown/60) + ":0" + Math.floor(countDown%60), timerX, timerY);
+    }else if(60*10 - 1 < countDown && countDown < 60*60 ){
+      //10分以上60分未満 かつ 9秒 < n < 60秒
+      text(Math.floor(countDown/60) + ":" + Math.floor(countDown%60), timerX, timerY);
+    }else if(59 < countDown && countDown < 60*10 && countDown%60 < 10){
+      //1分 < n < 10分 かつ 0秒 < n < 10秒
+      text("0" + Math.floor(countDown/60) + ":0" + Math.floor(countDown%60), timerX, timerY);
+    }else if(59 < countDown && countDown < 60*10){
+      //1分 < n < 10分 かつ　9秒 < n < 60秒
+      text("0" + Math.floor(countDown/60) + ":" + Math.floor(countDown%60), timerX, timerY);
+    }else if(9 < countDown && countDown < 60){
+      //9秒 < n < 60秒
+      text("00:" + countDown, timerX, timerY);
+    }else if(0 < countDown && countDown < 10){
+      //0秒 < n < 10秒
+      text("00:0" + countDown, timerX, timerY);
+    }else{
+      text("00:00", timerX, timerY);
+      showMessageDialog(null, "TIME UP!", "Alert", ERROR_MESSAGE);
+      noLoop();
+    }
+    }
+    </script>
     <title>Document</title>
 </head>
 
 <body>
-    <a href="" style="align-content: center;"><div id="wrapper">
-        <canvas id="processing-canvas" data-processing-sources="sample.pde"></canvas>
-    </div></a>
+  <div id="canvasContainer"></div>
+    <div id="wrapper">
+        <canvas id="processing-canvas" data-processing-sources="static/sample.pde"></canvas>
+    </div>
     <div id="share">
     <a href="https://twitter.com/share" 
     class="twitter-share-button" 
@@ -27,39 +91,5 @@
 
 </body>
 <script src="static/main.js"></script>
-<script type="text/processing" data-processing-target="processing-canvas">
-import static javax.swing.JOptionPane.*;
-
-int timeLimit = 100*60;
-int countDown;
-boolean timerExec = false;
-
-void setup(){
-  size(400, 300);
-  textAlign(CENTER);
-  textSize(50);
-  //showMessageDialog(null, "test text");
-}
-
-void draw(){
-  int timerX = width/2;
-  int timerY = height/2;
-  
-  background(255);
-  
-  int ms = millis()/1000;
-  
-  countDown = timeLimit - ms;
-  
-  fill(0);
-  if(0 < countDown){
-    text("00:0" + countDown, timerX, timerY);
-  }else{
-    text("00:00", timerX, timerY);
-    showMessageDialog(null, "TIME UP!", "Alert", ERROR_MESSAGE);
-    noLoop();
-  }
-}
-</script>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </html>
