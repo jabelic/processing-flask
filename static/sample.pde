@@ -23,18 +23,18 @@ void draw(){
   countDown = timeLimit - ms;
   
   fill(0);
-  if(60*60 - 1< countDown && countDown < 60*60*10 && ((countDown - 60*60*(countDown/(60*60)))/(60)) < 10 && countDown%60 < 10){
+  if(60*60 - 1< countDown && countDown < 60*60*10 && int((countDown - 60*60*int(countDown/(60*60)))/(60)) < 10 && countDown%60 < 10){
     //1時間以上10時間以下 かつ 0分以上10分未満 かつ 0秒 < n < 10秒
-    text("0" + int(countDown/(60*60)) + ":0" + int((countDown - 60*60*(countDown/(60*60)))/(60)) + ":0" + int(countDown%60), timerX, timerY);
-  }else if(60*60 - 1< countDown && ((countDown - 60*60*(countDown/(60*60)))/(60)) < 10 && countDown < 60*60*10){
+    text("0" + int(countDown/(60*60)) + ":0" + int((countDown - 60*60*int(countDown/(60*60)))/(60)) + ":0" + int(countDown%60), timerX, timerY);
+  }else if(60*60 - 1< countDown && int((countDown - 60*60*int(countDown/(60*60)))/(60)) < 10 && countDown < 60*60*10){
     //1時間以上10時間以下 かつ 0分以上10分未満 かつ 9秒 < n < 60秒
-    text("0" + int(countDown/(60*60)) + ":0" + int((countDown - 60*60*(countDown/(60*60)))/(60)) + ":" + int(countDown%60), timerX, timerY);
+    text("0" + int(countDown/(60*60)) + ":0" + int((countDown - 60*60*int(countDown/(60*60)))/(60)) + ":" + int(countDown%60), timerX, timerY);
   }else if(60*60 - 1< countDown && countDown < 60*60*10 && countDown%60 < 10){
     //1時間以上10時間以下 かつ 10分以上60分未満 かつ 0秒 < n < 10秒
-    text("0" + int(countDown/(60*60)) + ":" + int((countDown - 60*60*(countDown/(60*60)))/(60)) + ":0" + int(countDown%60), timerX, timerY);
+    text("0" + int(countDown/(60*60)) + ":" + int((countDown - 60*60*int(countDown/(60*60)))/(60)) + ":0" + int(countDown%60), timerX, timerY);
   }else if(60*60 - 1< countDown && countDown < 60*60*10){
     //1時間以上10時間以下 かつ 10分以上60分未満 かつ 9秒 < n < 60秒
-    text("0" + int(countDown/(60*60)) + ":" + int((countDown - 60*60*(countDown/(60*60)))/(60)) + ":" + int(countDown%60), timerX, timerY);
+    text("0" + int(countDown/(60*60)) + ":" + int((countDown - 60*60*int(countDown/(60*60)))/(60)) + ":" + int(countDown%60), timerX, timerY);
   }else if(60*10 - 1 < countDown && countDown < 60*60 && countDown%60 < 10){
     //10分以上60分未満 かつ 0秒 < n < 10秒
     text(int(countDown/60) + ":0" + int(countDown%60), timerX, timerY);
