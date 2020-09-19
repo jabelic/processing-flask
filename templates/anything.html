@@ -13,7 +13,7 @@
       const timerExec = false;
       function setup(){
       //キャンバスを作成
-      var myCanvas = createCanvas(500, 300);
+      var myCanvas = createCanvas(400, 300);
       myCanvas.parent("canvasContainer");
       //図形の線無し
       noStroke();
@@ -77,11 +77,12 @@
     <!-- Navbar content -->
     <p style="font-size: 20px;">ポモドーロタイマー for online class</p>
   </nav>
-  <div id="canvasContainer"></div>
+
+  <div class="d-flex justify-content-around" id="canvasContainer"></div>
     <!--div id="wrapper">
         <canvas id="processing-canvas" data-processing-sources="static/sample.pde"></canvas>
     </div-->
-    <div id="share">
+    <div id="share" class="d-flex justify-content-around">
     <a href="https://twitter.com/share" 
     class="twitter-share-button" 
     data-url="【ページのURL】" 
