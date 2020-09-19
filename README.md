@@ -9,3 +9,4 @@ NCC 2days speed hackathon 2020 summer, チーム２のプロダクトです.
 - p5.js(processing.jsから移植)
 - BootStrap4
 - heroku
+- gnicorn
