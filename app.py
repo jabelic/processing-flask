@@ -11,6 +11,10 @@ def index():
 def timer():
     return render_template('anything.html')
 
+@app.route("/timer90")
+def timer90():
+    return render_template('90.html')
+
 @app.route("/share")
 def share():
     return render_template('share.html')
