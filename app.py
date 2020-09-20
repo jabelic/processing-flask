@@ -7,9 +7,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
  
-@app.route("/timer")
-def timer():
-    return render_template('anything.html')
+@app.route("/timer100")
+def timer100():
+    return render_template('100.html')
 
 @app.route("/timer90")
 def timer90():
